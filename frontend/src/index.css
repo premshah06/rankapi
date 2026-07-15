@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-base: #f8f8f2;
+  --color-surface: #eeeeec;
+  --color-ink: #111111;
+  --color-heading: #0a0a0a;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  --glow-subtle: rgba(10, 10, 10, 0.15);
+  --glow-active: rgba(10, 10, 10, 0.35);
+  --glow-intense: rgba(10, 10, 10, 0.6);
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-heading);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+}
+
+/* Grain overlay */
+@keyframes grain {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 8% 4%;
+  }
+  100% {
+    background-position: 3% 9%;
+  }
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain 0.5s steps(2) infinite;
+}
+
+.will-anim {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Monospace numeric utility for stat displays */
+.font-mono-tab {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbar restraint (keeps clean chrome look) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base);
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d0;
+  border-radius: 999px;
+}

@@ -1,0 +1,55 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: rankapi-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rankapi_root
+      MYSQL_DATABASE: rankapi
+      MYSQL_USER: rankapi
+      MYSQL_PASSWORD: rankapi
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prankapi_root"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: rankapi-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./api
+    container_name: rankapi-api
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: rankapi
+      MYSQL_PASSWORD: rankapi
+      MYSQL_DATABASE: rankapi
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
