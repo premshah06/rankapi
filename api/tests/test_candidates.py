@@ -23,7 +23,7 @@ def test_candidates_excludes_interacted_items(db_session):
     candidate_ids = {item.id for item in candidates}
 
     assert len(candidates) > 0
-    assert 0 in candidate_ids
+    assert 0 not in candidate_ids
 
 
 def test_candidates_nonempty_for_cold_start_user(db_session):
