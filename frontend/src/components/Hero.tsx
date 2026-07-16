@@ -50,14 +50,14 @@ export function Hero() {
       </motion.div>
 
       <motion.a
-        href="#pipeline"
+        href="#demo"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.4 }}
         className="absolute bottom-10 left-6 md:left-10 flex items-center gap-3 text-sm2 text-ink/50"
       >
         <span className="h-8 w-px bg-ink/30 animate-pulse" />
-        Scroll to walk the pipeline
+        Scroll to try it live
       </motion.a>
     </section>
   )

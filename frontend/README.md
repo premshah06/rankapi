@@ -22,11 +22,12 @@ npm run dev
 
 Opens on http://localhost:5173.
 
-The "See it respond" demo panel tries `GET http://localhost:8000/recommendations/{user_id}?k=10`
-first (i.e. the real API, if you have it running via `docker compose up` or
-`uvicorn app.main:app` from `../api`). If that's not reachable within ~2.5s, it
-falls back to a clearly labeled static example shaped exactly like a real
-response — the whole build never blocks on a live backend connection.
+The "Try it live" demo panel queries `GET http://localhost:8000/recommendations/{user_id}?k={k}`
+for any of the 300 seeded users and a k you control with a slider (i.e. the real
+API, if you have it running via `docker compose up` or `uvicorn app.main:app`
+from `../api`). If that's not reachable within ~2.5s, it falls back to a
+clearly labeled static example shaped exactly like a real response — the whole
+build never blocks on a live backend connection.
 
 ## Build
 

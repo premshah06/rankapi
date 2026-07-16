@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import { useScrollStore, ACCENT_HEX } from '../lib/scrollStore'
 
 const LINKS = [
+  { href: '#demo', label: 'Demo' },
   { href: '#pipeline', label: 'Pipeline' },
   { href: '#metrics', label: 'Results' },
-  { href: '#demo', label: 'Demo' },
   { href: '#stack', label: 'Stack' },
 ]
 
